@@ -1,0 +1,1151 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Samson Adigun | Systems, Software and Security</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #09090E;
+  --ink2: #13141C;
+  --ink3: #1C1E2A;
+  --ink4: #232636;
+  --cream: #EDEAE2;
+  --amber: #E8963A;
+  --amber-soft: #F4A84A;
+  --amber-glow: rgba(232,150,58,0.10);
+  --amber-border: rgba(232,150,58,0.22);
+  --green: #22C55E;
+  --text: #C8C4BC;
+  --text-muted: #6B6860;
+  --text-faint: #3D3C3A;
+  --border: rgba(255,255,255,0.06);
+  --border-light: rgba(255,255,255,0.10);
+  --r: 10px;
+  --rl: 16px;
+  --rx: 22px;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--ink);
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* NAV */
+nav {
+  position: sticky; top: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; height: 60px;
+  background: rgba(9,9,14,0.88);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-brand {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: 'Sora', sans-serif;
+  font-weight: 700; font-size: 16px;
+  color: var(--cream); letter-spacing: -0.4px;
+  min-width: 0;
+}
+.nav-logo {
+  width: 54px; height: 36px; max-height: 36px;
+  object-fit: contain; display: block; flex: 0 0 auto;
+  filter: drop-shadow(0 5px 10px rgba(0,0,0,0.35));
+}
+.nav-brand em { color: var(--amber); font-style: normal; }
+.nav-links { display: flex; gap: 26px; list-style: none; }
+.nav-links a {
+  font-size: 13px; font-weight: 500;
+  color: var(--text-muted); text-decoration: none;
+  transition: color 0.18s;
+}
+.nav-links a:hover { color: var(--cream); }
+.nav-hire {
+  font-size: 12px; font-weight: 700;
+  color: var(--ink); background: var(--amber);
+  padding: 8px 18px; border-radius: 8px;
+  text-decoration: none; letter-spacing: 0.1px;
+  transition: opacity 0.18s;
+}
+.nav-hire:hover { opacity: 0.85; }
+
+/* HERO */
+.hero {
+  min-height: calc(100vh - 60px);
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+  gap: 28px;
+  align-items: center;
+  padding: 56px 48px 44px;
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(115deg, rgba(232,150,58,0.10), transparent 34%),
+    radial-gradient(circle at 78% 18%, rgba(34,197,94,0.12), transparent 34%),
+    var(--ink);
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 1px;
+  background: var(--border);
+}
+.hero-glow-tl { display: none; }
+.hero-left {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 0;
+  position: relative; z-index: 2;
+  max-width: 680px;
+}
+.hero-kicker {
+  display: inline-flex; align-items: center; gap: 8px;
+  width: max-content;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--amber);
+  letter-spacing: 1.5px; text-transform: uppercase;
+  border: 1px solid var(--amber-border);
+  background: var(--amber-glow);
+  padding: 7px 11px; border-radius: 999px;
+  margin-bottom: 20px;
+}
+.hero-status-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--green);
+  animation: blink 2.4s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.hero-name {
+  font-family: 'Sora', sans-serif;
+  font-weight: 800;
+  font-size: clamp(40px, 4.8vw, 62px);
+  line-height: 1.03;
+  letter-spacing: -1.8px;
+  color: var(--cream);
+  max-width: 680px;
+  margin-bottom: 22px;
+}
+.hero-name .accent { color: var(--amber); }
+.hero-role-row {
+  display: flex; align-items: center; gap: 8px;
+  margin: 0 0 24px;
+  flex-wrap: wrap;
+}
+.hero-role-pill {
+  font-size: 12px; font-weight: 700;
+  color: var(--cream);
+  background: rgba(255,255,255,0.045);
+  border: 1px solid var(--border-light);
+  padding: 8px 12px; border-radius: 8px;
+  letter-spacing: 0.1px;
+}
+.hero-bio {
+  font-size: 16px; color: var(--text);
+  line-height: 1.75; max-width: 620px;
+  margin-bottom: 24px;
+}
+.hero-bio strong { color: var(--cream); font-weight: 700; }
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px; }
+.btn-solid {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--amber); color: var(--ink);
+  font-weight: 800; font-size: 13px; letter-spacing: 0.1px;
+  padding: 13px 24px; border-radius: 9px;
+  text-decoration: none; transition: opacity 0.18s, transform 0.18s;
+}
+.btn-solid:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 7px;
+  color: var(--cream); font-size: 13px; font-weight: 700;
+  border: 1px solid var(--border-light);
+  background: rgba(255,255,255,0.035);
+  padding: 13px 24px; border-radius: 9px;
+  text-decoration: none; transition: all 0.18s;
+}
+.btn-outline:hover { border-color: var(--amber-border); color: var(--amber); }
+.hero-stats {
+  display: grid; grid-template-columns: repeat(4, minmax(98px, 1fr)); gap: 10px;
+  max-width: 620px;
+}
+.hero-stat-card {
+  border: 1px solid var(--border);
+  background: rgba(19,20,28,0.74);
+  border-radius: 12px;
+  padding: 14px 14px 13px;
+}
+.hstat-val {
+  font-family: 'Sora', sans-serif;
+  font-size: 27px; font-weight: 800; letter-spacing: -0.5px;
+  color: var(--cream); line-height: 1;
+}
+.hstat-val em { color: var(--amber); font-style: normal; }
+.hstat-lbl {
+  font-size: 10px; color: var(--text-muted); margin-top: 7px;
+  line-height: 1.35;
+}
+.hero-right {
+  position: relative;
+  min-height: 560px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  overflow: hidden;
+  background: linear-gradient(160deg, rgba(19,21,32,0.92) 0%, rgba(12,13,20,0.98) 100%);
+}
+.hero-right::before {
+  content: '';
+  position: absolute; inset: 34px;
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 18px;
+  pointer-events: none;
+}
+.hero-app-label {
+  position: absolute; top: 24px; left: 24px; right: 24px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--text-muted);
+  letter-spacing: 0.7px; text-transform: uppercase;
+  white-space: nowrap;
+  z-index: 3;
+}
+.hero-app-label span { color: var(--amber); }
+.hero-app-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); opacity: 0.8; }
+.hero-phone-wrap {
+  position: relative;
+  width: min(72%, 320px);
+  margin-top: 38px;
+  filter: drop-shadow(0 36px 80px rgba(0,0,0,0.78));
+  z-index: 2;
+}
+.hero-phone-wrap img {
+  width: 100%;
+  display: block;
+}
+.hero-product-card {
+  position: absolute;
+  left: 22px; bottom: 24px;
+  max-width: 245px;
+  background: rgba(9,9,14,0.78);
+  border: 1px solid var(--amber-border);
+  backdrop-filter: blur(14px);
+  border-radius: 14px;
+  padding: 14px 15px;
+  z-index: 4;
+}
+.hero-product-card strong {
+  display: block; color: var(--cream);
+  font-size: 13px; font-weight: 800;
+  margin-bottom: 4px;
+}
+.hero-product-card span {
+  display: block;
+  font-size: 11px; color: var(--text-muted);
+  line-height: 1.45;
+}
+/* SCROLL TICKER */
+.ticker {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0; overflow: hidden; position: relative;
+}
+.ticker::before, .ticker::after {
+  content: ''; position: absolute; top: 0; bottom: 0; width: 80px;
+  z-index: 2; pointer-events: none;
+}
+.ticker::before { left: 0; background: linear-gradient(to right, var(--ink), transparent); }
+.ticker::after  { right: 0; background: linear-gradient(to left, var(--ink), transparent); }
+.ticker-track {
+  display: flex; gap: 0;
+  width: max-content;
+  animation: ticker-scroll 32s linear infinite;
+}
+@keyframes ticker-scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.ticker-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 0 28px; white-space: nowrap;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--text-faint);
+  border-right: 1px solid var(--border);
+  letter-spacing: 0.2px;
+}
+.ticker-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--amber); opacity: 0.5; flex-shrink: 0; }
+
+/* SECTION BASICS */
+section { padding: 88px 48px; }
+.container { max-width: 1040px; margin: 0 auto; }
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--amber);
+  letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 10px;
+}
+.sec-h {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(28px, 3.5vw, 44px); font-weight: 700;
+  color: var(--cream); letter-spacing: -1.2px; line-height: 1.05;
+  margin-bottom: 10px;
+}
+.sec-sub { font-size: 15px; color: var(--text-muted); max-width: 460px; line-height: 1.75; margin-bottom: 52px; }
+
+/* SERVICES */
+.services-section { background: var(--ink); }
+.svc-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border); border-radius: var(--rx); overflow: hidden;
+}
+.svc-grid-b { grid-template-columns: repeat(3, 1fr); margin-top: 2px; }
+.svc-card {
+  background: var(--ink2); padding: 30px 26px;
+  transition: background 0.18s; position: relative;
+}
+.svc-card:hover { background: var(--ink3); }
+.svc-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--text-faint); margin-bottom: 16px;
+}
+.svc-card h3 {
+  font-family: 'Sora', sans-serif;
+  font-size: 16px; font-weight: 700; color: var(--cream);
+  margin-bottom: 9px; letter-spacing: -0.3px; line-height: 1.2;
+}
+.svc-card p { font-size: 13px; color: var(--text-muted); line-height: 1.7; margin-bottom: 18px; }
+.svc-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.svc-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--text-faint);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border); padding: 3px 9px; border-radius: 4px;
+}
+.svc-card.hot { border-top: 2px solid var(--amber); }
+.svc-hot-badge {
+  position: absolute; top: 0; right: 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; font-weight: 700; color: var(--amber);
+  background: var(--amber-glow); padding: 5px 11px;
+  border-bottom-left-radius: 8px; letter-spacing: 0.5px;
+}
+
+/* PROJECTS */
+.projects-section { background: var(--ink2); }
+.proj-list { display: flex; flex-direction: column; gap: 2px; }
+.proj-card {
+  background: var(--ink2); border: 1px solid var(--border);
+  border-radius: var(--r); padding: 26px 30px;
+  display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: start;
+  transition: border-color 0.18s, background 0.18s;
+}
+.proj-card:hover { border-color: var(--amber-border); background: rgba(232,150,58,0.025); }
+.proj-cat {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--amber);
+  letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 7px;
+}
+.proj-name {
+  font-family: 'Sora', sans-serif;
+  font-size: 17px; font-weight: 700; color: var(--cream);
+  letter-spacing: -0.3px; margin-bottom: 9px;
+}
+.proj-desc { font-size: 13px; color: var(--text-muted); line-height: 1.75; max-width: 580px; margin-bottom: 14px; }
+.proj-stack { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; }
+.proj-tag {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  color: var(--text-faint); background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border); padding: 3px 9px; border-radius: 4px;
+}
+.proj-live {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-faint);
+}
+.proj-live::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--green); flex-shrink: 0;
+  animation: blink 2s ease-in-out infinite;
+}
+.proj-metric { text-align: right; padding-top: 4px; }
+.proj-metric-val {
+  font-family: 'Sora', sans-serif;
+  font-size: 22px; font-weight: 700; color: var(--amber);
+  letter-spacing: -0.5px; line-height: 1;
+}
+.proj-metric-lbl { font-size: 11px; color: var(--text-muted); margin-top: 4px; line-height: 1.35; }
+
+/* EXPERIENCE */
+.exp-section { background: var(--ink); }
+.exp-list { display: flex; flex-direction: column; }
+.exp-row {
+  display: grid; grid-template-columns: 150px 1fr;
+  gap: 0 30px; padding: 30px 0;
+  border-bottom: 1px solid var(--border); position: relative;
+}
+.exp-row:last-child { border-bottom: none; }
+.exp-row::before {
+  content: ''; position: absolute;
+  left: 138px; top: 0; bottom: 0; width: 1px;
+  background: var(--border);
+}
+.exp-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--text-faint); line-height: 1.4; padding-top: 4px;
+}
+.exp-now { display: block; margin-top: 6px; font-size: 10px; color: var(--amber); letter-spacing: 0.3px; }
+.exp-role {
+  font-family: 'Sora', sans-serif;
+  font-size: 16px; font-weight: 700; color: var(--cream); letter-spacing: -0.3px; margin-bottom: 2px;
+}
+.exp-co { font-size: 13px; color: var(--amber); font-weight: 600; margin-bottom: 10px; }
+.exp-ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.exp-ul li {
+  font-size: 13px; color: var(--text-muted);
+  padding-left: 15px; position: relative; line-height: 1.65;
+}
+.exp-ul li::before {
+  content: ''; position: absolute; left: 0; top: 9px;
+  width: 5px; height: 1px; background: var(--text-faint);
+}
+
+/* SKILLS */
+.skills-section { background: var(--ink2); }
+.skills-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+.skgrp { margin-bottom: 32px; }
+.skgrp:last-child { margin-bottom: 0; }
+.skgrp-label {
+  font-family: 'Sora', sans-serif;
+  font-size: 13px; font-weight: 700; color: var(--cream);
+  margin-bottom: 12px; padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.sk-row { display: flex; align-items: center; gap: 10px; padding: 5px 0; }
+.sk-name { font-size: 12px; color: var(--text-muted); width: 155px; flex-shrink: 0; }
+.sk-track { flex: 1; height: 3px; background: rgba(255,255,255,0.05); border-radius: 2px; overflow: hidden; }
+.sk-fill { height: 100%; border-radius: 2px; background: var(--amber); opacity: 0.65; }
+.sk-yr { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-faint); width: 24px; text-align: right; flex-shrink: 0; }
+
+/* CERTS */
+.certs-section { background: var(--ink2); }
+.certs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; }
+.cert-card {
+  background: var(--ink3); border: 1px solid var(--border);
+  border-radius: var(--r); padding: 18px 20px;
+  display: flex; align-items: flex-start; gap: 13px;
+  transition: border-color 0.18s;
+}
+.cert-card:hover { border-color: var(--amber-border); }
+.cert-badge {
+  width: 36px; height: 36px; flex-shrink: 0; border-radius: 8px;
+  background: var(--amber-glow); border: 1px solid var(--amber-border);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Sora', sans-serif; font-size: 10px; font-weight: 800; color: var(--amber);
+}
+.cert-name { font-size: 13px; font-weight: 600; color: var(--cream); line-height: 1.3; margin-bottom: 3px; }
+.cert-issuer { font-size: 12px; color: var(--text-muted); margin-bottom: 5px; }
+.cert-pill {
+  font-size: 9px; font-weight: 700; padding: 2px 8px; border-radius: 100px;
+  display: inline-block; letter-spacing: 0.4px;
+}
+.cert-pill.active { background: rgba(34,197,94,0.1); color: #4ADE80; border: 1px solid rgba(34,197,94,0.22); }
+.cert-pill.progress { background: var(--amber-glow); color: var(--amber); border: 1px solid var(--amber-border); }
+.cert-pill.verify { background: rgba(99,179,237,0.1); color: #90CDF4; border: 1px solid rgba(99,179,237,0.22); }
+
+/* WHY WORK WITH ME */
+.why-section { background: var(--ink); }
+.why-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+.why-card {
+  background: var(--ink2); border: 1px solid var(--border);
+  border-radius: var(--r); padding: 20px 22px;
+  display: flex; gap: 14px; align-items: flex-start;
+  transition: border-color 0.18s;
+}
+.why-card:hover { border-color: var(--amber-border); }
+.why-icon {
+  width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0;
+  background: var(--amber-glow); border: 1px solid var(--amber-border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; margin-top: 1px;
+}
+.why-card h4 { font-size: 14px; font-weight: 700; color: var(--cream); margin-bottom: 5px; letter-spacing: -0.2px; }
+.why-card p { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+
+/* CONTACT */
+.contact-section { background: var(--ink2); border-top: 1px solid var(--border); }
+.contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+.contact-left .sec-sub { max-width: 100%; }
+.c-links { display: flex; flex-direction: column; gap: 8px; }
+.c-link {
+  display: flex; align-items: center; gap: 12px;
+  padding: 13px 16px; background: var(--ink3);
+  border: 1px solid var(--border); border-radius: var(--r);
+  text-decoration: none; transition: border-color 0.18s, background 0.18s;
+}
+.c-link:hover { border-color: var(--amber-border); background: var(--amber-glow); }
+.c-ico {
+  width: 30px; height: 30px; border-radius: 7px; flex-shrink: 0;
+  background: var(--amber-glow); border: 1px solid var(--amber-border);
+  display: flex; align-items: center; justify-content: center;
+}
+.c-ico svg { width: 14px; height: 14px; stroke: var(--amber); fill: none; stroke-width: 2; }
+.c-lbl { display: block; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.8px; }
+.c-val { display: block; font-size: 13px; font-weight: 600; color: var(--cream); margin-top: 1px; }
+.avail-card {
+  background: var(--ink3); border: 1px solid var(--amber-border);
+  border-radius: var(--rl); padding: 28px;
+}
+.avail-card h3 {
+  font-family: 'Sora', sans-serif;
+  font-size: 17px; font-weight: 700; color: var(--cream);
+  letter-spacing: -0.3px; margin-bottom: 7px;
+}
+.avail-card p { font-size: 13px; color: var(--text-muted); line-height: 1.7; margin-bottom: 20px; }
+.avail-list { display: flex; flex-direction: column; gap: 7px; }
+.avail-row {
+  display: flex; align-items: center; gap: 9px;
+  font-size: 13px; color: var(--text-muted);
+}
+.avail-tick {
+  width: 17px; height: 17px; border-radius: 4px; flex-shrink: 0;
+  background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; color: #4ADE80; font-weight: 700;
+}
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 22px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--text-faint);
+}
+footer a { color: var(--text-faint); text-decoration: none; }
+footer a:hover { color: var(--amber); }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; padding: 56px 24px; min-height: auto; }
+  .hero-name { font-size: clamp(38px, 10vw, 54px); }
+  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+  .hero-right { min-height: 520px; border-radius: 16px; }
+  .hero-phone-wrap { width: min(82%, 280px); }
+  .hero-product-card { left: 16px; right: 16px; bottom: 16px; max-width: none; }
+  nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  section { padding: 60px 24px; }
+  .svc-grid, .svc-grid-b { grid-template-columns: 1fr; }
+  .skills-cols, .contact-wrap, .why-grid { grid-template-columns: 1fr; }
+  .exp-row { grid-template-columns: 1fr; }
+  .exp-row::before { display: none; }
+  .proj-card { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 8px; text-align: center; padding: 20px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-brand"><img class="nav-logo" src="gmd-logo.png" alt="GMD Networks logo"></span>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#certifications">Credentials</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="nav-hire" href="#contact">Hire me</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow-tl"></div>
+
+  <div class="hero-left">
+    <div class="hero-kicker">
+      <span class="hero-status-dot"></span>
+      Available for Remote GIG and on-site work
+    </div>
+
+    <h1 class="hero-name">
+      Adigun Samson,<br> The Tech Savvy<span class="accent">.</span>
+    </h1>
+
+    <div class="hero-role-row">
+      <span class="hero-role-pill">Systems Engineer</span>
+      <span class="hero-role-pill">Software Builder</span>
+      <span class="hero-role-pill">Security Specialist</span>
+      <span class="hero-role-pill">UI/UX Designer</span>
+    </div>
+
+    <p class="hero-bio">
+      I build practical technology for businesses: <strong>secure networks, cloud systems, SaaS tools, websites and mobile apps</strong> that are reliable enough for daily operations.
+    </p>
+
+    <div class="hero-btns">
+      <a class="btn-solid" href="#contact">Start a project</a>
+      <a class="btn-outline" href="#projects">View shipped work</a>
+      <a class="btn-outline" href="https://gmd-networks.com.ng" target="_blank">Visit GMD Networks</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hero-stat-card"><div class="hstat-val">7<em>+</em></div><div class="hstat-lbl">Years in IT and Software</div></div>
+      <div class="hero-stat-card"><div class="hstat-val">11<em>+</em></div><div class="hstat-lbl">Products and designs</div></div>
+      <div class="hero-stat-card"><div class="hstat-val">80<em>+</em></div><div class="hstat-lbl">Devices managed</div></div>
+      <div class="hero-stat-card"><div class="hstat-val">100<em>+</em></div><div class="hstat-lbl">End users supported</div></div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-app-label">
+      <span>Nigeria Tax Companion</span>
+      <span style="display:inline-flex;align-items:center;gap:7px;"><i class="hero-app-dot"></i> Mobile App</span>
+    </div>
+    <div class="hero-phone-wrap">
+      <img src="Home-removebg-preview.png" alt="Nigeria Tax Companion app mockup">
+    </div>
+    <div class="hero-product-card">
+      <strong>NTC mobile app</strong>
+      <span>Tax tools, PAYE, VAT, payroll, invoice support and AI assistance for Nigerian users.</span>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <div class="ticker-item"><span class="ticker-dot"></span> Microsoft Azure</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> Laravel / PHP</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> React / TypeScript</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> Active Directory</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> Supabase / PostgreSQL</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> Ansible / Terraform</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> CrowdStrike / Zscaler</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> Ubiquiti Networking</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> Intune / Entra ID</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> Docker / VMware</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> PowerShell / Python</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> Node.js / Golang</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> Linux / Windows Server</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> Capacitor Android</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> Microsoft Azure</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> Laravel / PHP</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> React / TypeScript</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> Active Directory</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> Supabase / PostgreSQL</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> Ansible / Terraform</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> CrowdStrike / Zscaler</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> Ubiquiti Networking</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> Intune / Entra ID</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> Docker / VMware</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> PowerShell / Python</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> Node.js / Golang</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> Linux / Windows Server</div>
+    <div class="ticker-item"><span class="ticker-dot"></span> Capacitor Android</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services" class="services-section">
+  <div class="container">
+    <p class="eyebrow">What I do</p>
+    <h2 class="sec-h">What I can build for you</h2>
+    <p class="sec-sub">Six focused ways I help businesses build, secure and run better technology.</p>
+
+    <div class="svc-grid">
+      <div class="svc-card hot">
+        <div class="svc-hot-badge">MOST REQUESTED</div>
+        <div class="svc-num">01</div>
+        <h3>Software and SaaS Development</h3>
+        <p>Business-ready web and mobile apps, from dashboards and portals to SaaS products with real users and production workflows.</p>
+        <div class="svc-tags">
+          <span class="svc-tag">Laravel</span><span class="svc-tag">React</span><span class="svc-tag">TypeScript</span>
+          <span class="svc-tag">Node.js</span><span class="svc-tag">Supabase</span><span class="svc-tag">Android</span>
+          <span class="svc-tag">Multi-tenant SaaS</span><span class="svc-tag">REST APIs</span>
+        </div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">02</div>
+        <h3>IT Infrastructure and Systems</h3>
+        <p>Servers, Microsoft 365, Entra ID, Intune, endpoints and cloud environments configured for stability, access control and growth.</p>
+        <div class="svc-tags">
+          <span class="svc-tag">Azure</span><span class="svc-tag">Intune</span><span class="svc-tag">Active Directory</span>
+          <span class="svc-tag">Windows Server</span><span class="svc-tag">Linux</span><span class="svc-tag">VMware</span>
+        </div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">03</div>
+        <h3>Networking and Connectivity</h3>
+        <p>LAN/WAN design, VLANs, wireless coverage, cabling and connectivity planning for offices, hotels and multi-site operations.</p>
+        <div class="svc-tags">
+          <span class="svc-tag">Ubiquiti</span><span class="svc-tag">VLAN</span><span class="svc-tag">Wi-Fi</span>
+          <span class="svc-tag">LAN/WAN</span><span class="svc-tag">Cabling</span><span class="svc-tag">IPTV</span>
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="svc-grid svc-grid-b" style="margin-top:2px;">
+      <div class="svc-card">
+        <div class="svc-num">04</div>
+        <h3>Cybersecurity and Compliance</h3>
+        <p>Endpoint protection, MFA, Zero Trust access, VPNs, audits and security training built into the environment from day one.</p>
+        <div class="svc-tags">
+          <span class="svc-tag">CrowdStrike</span><span class="svc-tag">Zscaler</span><span class="svc-tag">Sophos</span>
+          <span class="svc-tag">Zero Trust</span><span class="svc-tag">CCEP Certified</span><span class="svc-tag">VPN</span>
+        </div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">05</div>
+        <h3>Automation and DevOps</h3>
+        <p>PowerShell, Python, Ansible, Terraform and Azure Automation for repeatable deployments, backups, patching and reporting.</p>
+        <div class="svc-tags">
+          <span class="svc-tag">Ansible</span><span class="svc-tag">Terraform</span><span class="svc-tag">PowerShell</span>
+          <span class="svc-tag">Python</span><span class="svc-tag">Docker</span><span class="svc-tag">Azure Automation</span>
+        </div>
+      </div>
+<div class="svc-card">
+        <div class="svc-num">06</div>
+        <h3>UI/UX and Product Design</h3>
+        <p>Clean Figma layouts, user journeys, product screens and responsive web concepts for brands that need polished digital experiences.</p>
+        <div class="svc-tags">
+          <span class="svc-tag">Figma</span><span class="svc-tag">Wireframes</span><span class="svc-tag">Web UI</span>
+          <span class="svc-tag">Product Flow</span><span class="svc-tag">Responsive Design</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="projects-section">
+  <div class="container">
+    <p class="eyebrow">Proof of work</p>
+    <h2 class="sec-h">Things I've shipped</h2>
+    <p class="sec-sub">Selected products, systems and design work delivered for real business use.</p>
+    <div class="proj-list">
+
+      <div class="proj-card">
+        <div>
+          <div class="proj-cat">SaaS Product | Hospitality</div>
+          <div class="proj-name">GMDPro - POS and Hotel Management System</div>
+          <p class="proj-desc">A full multi-tenant SaaS for hotels and restaurants. Includes point-of-sale, room reservations, folio management, housekeeping, stock control, raw material deduction, and a PWA-ready frontend. Built with a custom license server, update pipeline, and role-based permissions.</p>
+          <div class="proj-stack">
+            <span class="proj-tag">Laravel</span><span class="proj-tag">Multi-tenant</span>
+            <span class="proj-tag">Spatie Permissions</span><span class="proj-tag">MySQL</span>
+            <span class="proj-tag">PWA</span><span class="proj-tag">REST API</span><span class="proj-tag">DomPDF</span>
+          </div>
+          <span class="proj-live">demo.gmdpro.online - live</span>
+        </div>
+        <div class="proj-metric">
+          <div class="proj-metric-val">48</div>
+          <div class="proj-metric-lbl">Routes in production</div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div>
+          <div class="proj-cat">Mobile App | Fintech / Tax</div>
+          <div class="proj-name">Nigeria Tax Companion (NTC)</div>
+          <p class="proj-desc">A freemium Android app and web platform helping Nigerian businesses and individuals with PAYE, VAT, payroll, invoice generation, and compliance tracking. Ships with an AI Tax Assistant, 5-language support, push notifications, and Paystack payments.</p>
+          <div class="proj-stack">
+            <span class="proj-tag">React</span><span class="proj-tag">TypeScript</span>
+            <span class="proj-tag">Supabase</span><span class="proj-tag">Capacitor Android</span>
+            <span class="proj-tag">Paystack</span><span class="proj-tag">Edge Functions</span><span class="proj-tag">FCM</span>
+          </div>
+          <span class="proj-live">Google Play Store - closed beta</span>
+        </div>
+        <div class="proj-metric">
+          <div class="proj-metric-val">5</div>
+          <div class="proj-metric-lbl">Languages supported</div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div>
+          <div class="proj-cat">Web Platform | Tax Consulting</div>
+          <div class="proj-name">Red Donisha - Tax Consulting Website</div>
+          <p class="proj-desc">A full-stack consulting platform for tax advisory services. Client-facing React SPA with an Express.js and MySQL backend API, JWT authentication, admin dashboard, and cPanel deployment on a self-managed Linux server.</p>
+          <div class="proj-stack">
+            <span class="proj-tag">React</span><span class="proj-tag">TanStack</span>
+            <span class="proj-tag">Express.js</span><span class="proj-tag">MySQL</span>
+            <span class="proj-tag">JWT Auth</span><span class="proj-tag">cPanel / Linux</span>
+          </div>
+          <span class="proj-live">reddonisha.com - live</span>
+        </div>
+        <div class="proj-metric">
+          <div class="proj-metric-val">Full</div>
+          <div class="proj-metric-lbl">Stack, built solo</div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div>
+          <div class="proj-cat">Company Website</div>
+          <div class="proj-name">GMD Networks - Company Website</div>
+          <p class="proj-desc">The official website for GMD Networks, showcasing IT services, software solutions, networking, CCTV, and digital transformation offerings for Nigerian businesses and beyond.</p>
+          <div class="proj-stack">
+            <span class="proj-tag">Web Design</span><span class="proj-tag">Business Site</span><span class="proj-tag">GMD Networks</span>
+          </div>
+          <span class="proj-live">gmd-networks.com.ng - live</span>
+        </div>
+        <div class="proj-metric">
+          <div class="proj-metric-val">Live</div>
+          <div class="proj-metric-lbl">Public website</div>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div>
+          <div class="proj-cat">UI/UX Design | Fashion Commerce</div>
+          <div class="proj-name">Tolyus Concevoir - E-commerce UI/UX Concept</div>
+          <p class="proj-desc">A Figma design concept for a luxury fashion and bespoke tailoring store. The work covers homepage storytelling, product browsing, filtering, cart flow, booking prompts and elegant visual direction for a premium clothing brand.</p>
+          <div class="proj-stack">
+            <span class="proj-tag">Figma</span><span class="proj-tag">UI/UX</span>
+            <span class="proj-tag">E-commerce</span><span class="proj-tag">Product Pages</span><span class="proj-tag">Responsive Web</span>
+          </div>
+          <span class="proj-live">UI/UX Figma concept</span>
+        </div>
+        <div class="proj-metric">
+          <div class="proj-metric-val">UX</div>
+          <div class="proj-metric-lbl">Fashion commerce flow</div>
+        </div>
+      </div>
+
+
+      <div class="proj-card">
+        <div>
+          <div class="proj-cat">Infrastructure | Automation</div>
+          <div class="proj-name">Network Automation - 50+ Device Fleet</div>
+          <p class="proj-desc">Replaced 10-hour manual SSH configuration cycles with Ansible playbooks managing 50+ Ubiquiti devices. Added Python-based logging, automated alerting, and a management dashboard.</p>
+          <div class="proj-stack">
+            <span class="proj-tag">Ansible</span><span class="proj-tag">Python</span>
+            <span class="proj-tag">Ubiquiti</span><span class="proj-tag">Bash</span>
+          </div>
+        </div>
+        <div class="proj-metric">
+          <div class="proj-metric-val">10h to 45m</div>
+          <div class="proj-metric-lbl">Per config change cycle</div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div>
+          <div class="proj-cat">Cloud | Azure IaC</div>
+          <div class="proj-name">Azure Infrastructure-as-Code Deployment</div>
+          <p class="proj-desc">Terraform templates for repeatable, version-controlled Azure cloud provisioning. Replaced ad-hoc manual deploys with auditable, environment-consistent builds and a 60% faster deployment cycle.</p>
+          <div class="proj-stack">
+            <span class="proj-tag">Terraform</span><span class="proj-tag">Azure</span>
+            <span class="proj-tag">Git</span><span class="proj-tag">CI/CD</span>
+          </div>
+        </div>
+        <div class="proj-metric">
+          <div class="proj-metric-val">60%</div>
+          <div class="proj-metric-lbl">Faster deployments</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="exp-section">
+  <div class="container">
+    <p class="eyebrow">Career history</p>
+    <h2 class="sec-h">Where I have worked</h2>
+    <p class="sec-sub">7+ years across systems administration, network engineering, cloud operations and technical support.</p>
+    <div class="exp-list">
+
+      <div class="exp-row">
+        <div class="exp-date">2024 - Present<span class="exp-now">Active</span></div>
+        <div>
+          <div class="exp-role">System Administrator</div>
+          <div class="exp-co">The Hotel Macs | Surulere, Lagos</div>
+          <ul class="exp-ul">
+            <li>Maintained Linux and Windows servers for HMS, PMS, POS and guest Wi-Fi services with 99.5% uptime.</li>
+            <li>Administered Microsoft 365, Exchange, SharePoint, Teams, Entra ID and conditional access for 50+ users.</li>
+            <li>Managed Intune endpoints, Azure VM backups and patch cycles, saving 10+ hours of manual admin work weekly.</li>
+            <li>Monitored CCTV, reservation databases, email and file servers with faster fault diagnosis and SLA response.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-row">
+        <div class="exp-date">2023 - 2024</div>
+        <div>
+          <div class="exp-role">System Administrator / Network Engineer</div>
+          <div class="exp-co">Signature Solution | Victoria Island, Lagos</div>
+          <ul class="exp-ul">
+            <li>Designed Linux and Windows Server environments for client organizations with secure, high-availability configurations.</li>
+            <li>Administered Azure, Microsoft 365, Entra ID, SSO, VM provisioning and Docker-based deployments.</li>
+            <li>Configured Zscaler Zero Trust, VPN access, backup strategies and disaster recovery for 5+ client environments.</li>
+            <li>Delivered IT consulting, architecture planning and staff training that improved resolution times by 30%.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-row">
+        <div class="exp-date">2022 - 2023</div>
+        <div>
+          <div class="exp-role">System Administrator / Network Administrator</div>
+          <div class="exp-co">African Industries Group | Ikorodu, Lagos</div>
+          <ul class="exp-ul">
+            <li>Managed Windows Server and Linux infrastructure across sites, including AD, Group Policy, DNS, DHCP and file servers.</li>
+            <li>Administered Intune for 60+ devices with security baselines, patch policies and remote wipe readiness.</li>
+            <li>Maintained switches, routers and firewalls while using VLAN segmentation to improve performance and isolation.</li>
+            <li>Resolved escalated Tier 2/3 infrastructure incidents with average sub-4-hour resolution time.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-row">
+        <div class="exp-date">2021 - 2022</div>
+        <div>
+          <div class="exp-role">Technical Engineer / System Administrator</div>
+          <div class="exp-co">Sinocell Technology | Lekki, Lagos</div>
+          <ul class="exp-ul">
+            <li>Delivered a full network plan with MikroTik CRS switches, VLANs and Sophos firewall security within 3 months.</li>
+            <li>Managed Entra ID, Active Directory, Microsoft 365 licensing, MFA enrollment and compliance policies.</li>
+            <li>Configured Sophos VPN and firewall controls to secure remote access and sensitive business data.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-row">
+        <div class="exp-date">2020 - 2021</div>
+        <div>
+          <div class="exp-role">Technical Support Specialist</div>
+          <div class="exp-co">The Hotel Macs | Surulere, Lagos</div>
+          <ul class="exp-ul">
+            <li>Supported Linux and Windows servers for PMS, POS and reservation systems used by 80+ staff members.</li>
+            <li>Optimized hotel Wi-Fi, firewall, DHCP and DNS services for uninterrupted guest and business operations.</li>
+            <li>Upgraded production and non-production servers with capacity planning and hardware improvements.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-row">
+        <div class="exp-date">2018 - 2020</div>
+        <div>
+          <div class="exp-role">IT Support Technician</div>
+          <div class="exp-co">Golden Tulip Hotels | Lagos</div>
+          <ul class="exp-ul">
+            <li>Supported IT roadmaps, technology upgrades and cross-functional project delivery across hotel departments.</li>
+            <li>Performed root cause analysis for OS, network and application incidents, reducing MTTR by 25%.</li>
+            <li>Tracked IT assets and service requests with ServiceNow across capital and non-capital equipment.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="skills-section">
+  <div class="container">
+    <p class="eyebrow">Technical depth</p>
+    <h2 class="sec-h">Skills and Tools</h2>
+    <p class="sec-sub">Built across 7+ years of real production environments, not tutorials.</p>
+    <div class="skills-cols">
+      <div>
+        <div class="skgrp">
+          <div class="skgrp-label">Cloud and Microsoft Stack</div>
+          <div class="sk-row"><span class="sk-name">Microsoft Azure</span><div class="sk-track"><div class="sk-fill" style="width:90%"></div></div><span class="sk-yr">5yr</span></div>
+          <div class="sk-row"><span class="sk-name">Microsoft 365 Admin</span><div class="sk-track"><div class="sk-fill" style="width:88%"></div></div><span class="sk-yr">5yr</span></div>
+          <div class="sk-row"><span class="sk-name">Intune / Entra ID</span><div class="sk-track"><div class="sk-fill" style="width:82%"></div></div><span class="sk-yr">3yr</span></div>
+          <div class="sk-row"><span class="sk-name">Active Directory</span><div class="sk-track"><div class="sk-fill" style="width:92%"></div></div><span class="sk-yr">6yr</span></div>
+        </div>
+        <div class="skgrp">
+          <div class="skgrp-label">Automation and DevOps</div>
+          <div class="sk-row"><span class="sk-name">PowerShell</span><div class="sk-track"><div class="sk-fill" style="width:85%"></div></div><span class="sk-yr">5yr</span></div>
+          <div class="sk-row"><span class="sk-name">Python</span><div class="sk-track"><div class="sk-fill" style="width:75%"></div></div><span class="sk-yr">4yr</span></div>
+          <div class="sk-row"><span class="sk-name">Ansible</span><div class="sk-track"><div class="sk-fill" style="width:78%"></div></div><span class="sk-yr">3yr</span></div>
+          <div class="sk-row"><span class="sk-name">Terraform</span><div class="sk-track"><div class="sk-fill" style="width:70%"></div></div><span class="sk-yr">2yr</span></div>
+          <div class="sk-row"><span class="sk-name">Docker</span><div class="sk-track"><div class="sk-fill" style="width:72%"></div></div><span class="sk-yr">3yr</span></div>
+        </div>
+        <div class="skgrp">
+          <div class="skgrp-label">Security</div>
+          <div class="sk-row"><span class="sk-name">Zscaler</span><div class="sk-track"><div class="sk-fill" style="width:76%"></div></div><span class="sk-yr">3yr</span></div>
+          <div class="sk-row"><span class="sk-name">CrowdStrike</span><div class="sk-track"><div class="sk-fill" style="width:74%"></div></div><span class="sk-yr">3yr</span></div>
+          <div class="sk-row"><span class="sk-name">Sophos</span><div class="sk-track"><div class="sk-fill" style="width:72%"></div></div><span class="sk-yr">3yr</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="skgrp">
+          <div class="skgrp-label">Software Development</div>
+          <div class="sk-row"><span class="sk-name">Laravel / PHP</span><div class="sk-track"><div class="sk-fill" style="width:84%"></div></div><span class="sk-yr">4yr</span></div>
+          <div class="sk-row"><span class="sk-name">React / TypeScript</span><div class="sk-track"><div class="sk-fill" style="width:80%"></div></div><span class="sk-yr">3yr</span></div>
+          <div class="sk-row"><span class="sk-name">Node.js</span><div class="sk-track"><div class="sk-fill" style="width:75%"></div></div><span class="sk-yr">3yr</span></div>
+          <div class="sk-row"><span class="sk-name">Golang</span><div class="sk-track"><div class="sk-fill" style="width:60%"></div></div><span class="sk-yr">2yr</span></div>
+          <div class="sk-row"><span class="sk-name">Supabase / PostgreSQL</span><div class="sk-track"><div class="sk-fill" style="width:78%"></div></div><span class="sk-yr">2yr</span></div>
+          <div class="sk-row"><span class="sk-name">Capacitor (Android)</span><div class="sk-track"><div class="sk-fill" style="width:72%"></div></div><span class="sk-yr">2yr</span></div>
+        </div>
+        <div class="skgrp">
+          <div class="skgrp-label">Infrastructure</div>
+          <div class="sk-row"><span class="sk-name">Windows Server</span><div class="sk-track"><div class="sk-fill" style="width:88%"></div></div><span class="sk-yr">6yr</span></div>
+          <div class="sk-row"><span class="sk-name">Linux (Ubuntu / RHEL)</span><div class="sk-track"><div class="sk-fill" style="width:82%"></div></div><span class="sk-yr">5yr</span></div>
+          <div class="sk-row"><span class="sk-name">VMware / Hyper-V</span><div class="sk-track"><div class="sk-fill" style="width:78%"></div></div><span class="sk-yr">4yr</span></div>
+          <div class="sk-row"><span class="sk-name">Ubiquiti Networking</span><div class="sk-track"><div class="sk-fill" style="width:85%"></div></div><span class="sk-yr">4yr</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications" class="certs-section">
+  <div class="container">
+    <p class="eyebrow">Credentials</p>
+    <h2 class="sec-h">Certifications and Education</h2>
+    <p class="sec-sub">Formal education, professional certifications, and completed Udemy and Alison learning in cloud, security, software and infrastructure.</p>
+    <div class="certs-grid">
+      <div class="cert-card"><div class="cert-badge">AZ</div><div><div class="cert-name">Microsoft Azure Fundamentals</div><div class="cert-issuer">Microsoft | AZ-900</div><span class="cert-pill active">Certified</span></div></div>
+      <div class="cert-card"><div class="cert-badge">AZ</div><div><div class="cert-name">Azure Administrator</div><div class="cert-issuer">Microsoft | AZ-104</div><span class="cert-pill progress">In Progress</span></div></div>
+      <div class="cert-card"><div class="cert-badge">CC</div><div><div class="cert-name">Certified Cybersecurity Educator Professional</div><div class="cert-issuer">Red Team Leaders | CCEP | Nov 2025</div><span class="cert-pill verify">Verifiable</span></div></div>
+      <div class="cert-card"><div class="cert-badge">BSc</div><div><div class="cert-name">B.Sc Computer Science</div><div class="cert-issuer">NOUN | In View</div><span class="cert-pill progress">In Progress</span></div></div>
+      <div class="cert-card"><div class="cert-badge">IT</div><div><div class="cert-name">IT Support Specialist</div><div class="cert-issuer">Alison</div><span class="cert-pill active">Certified</span></div></div>
+      <div class="cert-card"><div class="cert-badge">CS</div><div><div class="cert-name">Customer Service Professional</div><div class="cert-issuer">Alison</div><span class="cert-pill active">Certified</span></div></div>
+      <div class="cert-card"><div class="cert-badge">NW</div><div><div class="cert-name">Networking and Infrastructure</div><div class="cert-issuer">Alison</div><span class="cert-pill active">Certified</span></div></div>
+      <div class="cert-card"><div class="cert-badge">LX</div><div><div class="cert-name">Linux System Administration</div><div class="cert-issuer">Udemy</div><span class="cert-pill active">Certified</span></div></div>
+      <div class="cert-card"><div class="cert-badge">AZ</div><div><div class="cert-name">AZ-104 Identity and Governance</div><div class="cert-issuer">Udemy</div><span class="cert-pill active">Certified</span></div></div>
+      <div class="cert-card"><div class="cert-badge">DK</div><div><div class="cert-name">Docker Containers</div><div class="cert-issuer">Udemy</div><span class="cert-pill active">Certified</span></div></div>
+      <div class="cert-card"><div class="cert-badge">PY</div><div><div class="cert-name">Python Basics</div><div class="cert-issuer">Udemy</div><span class="cert-pill active">Certified</span></div></div>
+      <div class="cert-card"><div class="cert-badge">CY</div><div><div class="cert-name">Cybersecurity Fundamentals</div><div class="cert-issuer">Udemy</div><span class="cert-pill active">Certified</span></div></div>
+      <div class="cert-card"><div class="cert-badge">AN</div><div><div class="cert-name">Android App Development</div><div class="cert-issuer">Udemy</div><span class="cert-pill active">Certified</span></div></div>
+      <div class="cert-card"><div class="cert-badge">WEB</div><div><div class="cert-name">HTML, CSS and JavaScript</div><div class="cert-issuer">Udemy</div><span class="cert-pill active">Certified</span></div></div>
+      <div class="cert-card"><div class="cert-badge">GC</div><div><div class="cert-name">DevSecOps with Google Cloud</div><div class="cert-issuer">Udemy</div><span class="cert-pill active">Certified</span></div></div>
+      <div class="cert-card"><div class="cert-badge">EH</div><div><div class="cert-name">Network Ethical Hacking</div><div class="cert-issuer">Udemy</div><span class="cert-pill active">Certified</span></div></div>
+      <div class="cert-card"><div class="cert-badge">PY</div><div><div class="cert-name">Python Programming and Projects</div><div class="cert-issuer">Udemy</div><span class="cert-pill active">Certified</span></div></div>
+      <div class="cert-card"><div class="cert-badge">PHP</div><div><div class="cert-name">Modern PHP Web Development</div><div class="cert-issuer">Udemy</div><span class="cert-pill active">Certified</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY WORK WITH ME -->
+<section class="why-section">
+  <div class="container">
+    <p class="eyebrow">Why work with me</p>
+    <h2 class="sec-h">What you actually get</h2>
+    <p class="sec-sub">I've shipped real systems to real users under real pressure.</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">></div>
+        <div>
+          <h4>You talk to the person doing the work</h4>
+          <p>No account managers, no handoff chains. You explain the problem once and I build the solution.</p>
+        </div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">></div>
+        <div>
+          <h4>Proven track record across industries</h4>
+          <p>Hotels, manufacturing, telecoms, finance. I've built and managed systems across diverse sectors.</p>
+        </div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">></div>
+        <div>
+          <h4>Full stack, not a one-trick specialist</h4>
+          <p>I can handle your network, servers, cloud, software, and security, often at the same time.</p>
+        </div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">></div>
+        <div>
+          <h4>I've shipped apps people actually use</h4>
+          <p>NTC is on the Play Store. GMDPro runs in a live hotel. These are production systems, not portfolio demos.</p>
+        </div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">></div>
+        <div>
+          <h4>Security-aware by default</h4>
+          <p>As a CCEP-certified practitioner, security is built into everything I design, not bolted on at the end.</p>
+        </div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">></div>
+        <div>
+          <h4>Automation-first mindset</h4>
+          <p>If something can be scripted or automated, I'll build it that way so you don't pay for the same work twice.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="container">
+    <div class="contact-wrap">
+      <div class="contact-left">
+        <p class="eyebrow">Get in touch</p>
+        <h2 class="sec-h">Ready to build something?</h2>
+        <p class="sec-sub">Tell me what you need built, fixed, or automated. I work across remote and on-site engagements worldwide.</p>
+        <div class="c-links">
+          <a class="c-link" href="mailto:Samsonadigun83@gmail.com">
+            <div class="c-ico"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div><span class="c-lbl">Personal Email</span><span class="c-val">Samsonadigun83@gmail.com</span></div>
+          </a>
+          <a class="c-link" href="mailto:info@gmd-networks.com.ng">
+            <div class="c-ico"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+            <div><span class="c-lbl">Business Email</span><span class="c-val">info@gmd-networks.com.ng</span></div>
+          </a>
+          <a class="c-link" href="https://linkedin.com/in/samson-adigun-a211a51a5" target="_blank">
+            <div class="c-ico"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+            <div><span class="c-lbl">LinkedIn</span><span class="c-val">linkedin.com/in/samson-adigun-a211a51a5</span></div>
+          </a>
+          <a class="c-link" href="https://gmd-networks.com.ng" target="_blank">
+            <div class="c-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+            <div><span class="c-lbl">Company Website</span><span class="c-val">gmd-networks.com.ng</span></div>
+          </a>
+          <a class="c-link" href="tel:+2348104376585">
+            <div class="c-ico"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.72a16 16 0 006.29 6.29l1.28-1.28a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+            <div><span class="c-lbl">Phone / WhatsApp</span><span class="c-val">+234 810 437 6585</span></div>
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="avail-card">
+          <h3>Available for these engagements</h3>
+          <p>Project-based and ongoing work, locally and internationally.</p>
+          <div class="avail-list">
+            <div class="avail-row"><div class="avail-tick">+</div>Software and SaaS development</div>
+            <div class="avail-row"><div class="avail-tick">+</div>IT infrastructure setup and management</div>
+            <div class="avail-row"><div class="avail-tick">+</div>Network design and deployment</div>
+            <div class="avail-row"><div class="avail-tick">+</div>Cybersecurity audits and hardening</div>
+            <div class="avail-row"><div class="avail-tick">+</div>Cloud migration and administration</div>
+            <div class="avail-row"><div class="avail-tick">+</div>Automation and scripting projects</div>
+            <div class="avail-row"><div class="avail-tick">+</div>Remote support retainers</div>
+            <div class="avail-row"><div class="avail-tick">+</div>US, UK, AU and CA timezone available</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Adigun Samson | Lagos, Nigeria</span>
+  <span>Systems | Software | Security</span>
+  <a href="https://gmd-networks.com.ng" target="_blank">gmd-networks.com.ng</a>
+</footer>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
